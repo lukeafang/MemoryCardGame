@@ -25,5 +25,9 @@ struct CardView: View {
                     .fill(Color.blue)
             }
         }
+        .rotation3DEffect(
+            .degrees(card.isFaceUp ? 0 : 180),
+            axis: (x: 0, y: 1, z: 0)
+        )
     }
 }
