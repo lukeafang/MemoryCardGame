@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct MemoryGameView: View {
+    @ObservedObject var viewModel = MemoryGameViewModel()
+    
+    let gridLayout = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            LazyVGrid(columns: gridLayout, spacing: 10) {
+                ForEach(viewModel.cards) { card in
+                    CardView(card: card)
+                        .onTapGesture {
+                            viewModel.choose(card)
+                        }
+                        .aspectRatio(2/3, contentMode: .fit)
+                }
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
