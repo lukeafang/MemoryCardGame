@@ -29,5 +29,8 @@ struct CardView: View {
             .degrees(card.isFaceUp ? 0 : 180),
             axis: (x: 0, y: 1, z: 0)
         )
+        .opacity(card.isMatched ? 0 : 1)
+        .animation(.easeInOut(duration: 0.5), value: card.isFaceUp)
+        .animation(.easeInOut(duration: 0.5), value: card.isMatched)
     }
 }
