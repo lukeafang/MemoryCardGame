@@ -18,16 +18,9 @@ struct MemoryGameView: View {
     
     var body: some View {
         VStack {
-            LazyVGrid(columns: gridLayout, spacing: 10) {
-                ForEach(viewModel.cards) { card in
-                    CardView(card: card)
-                        .onTapGesture {
-                            viewModel.choose(card)
-                        }
-                        .aspectRatio(2/3, contentMode: .fit)
-                }
+            ScrollView {
+                cards
             }
-            .padding()
             
             Button(action: {
                 viewModel.restartGame()
@@ -43,6 +36,21 @@ struct MemoryGameView: View {
             }
             .padding(.top, 20)
         }
+    }
+    
+    var cards: some View {
+        LazyVGrid(columns: gridLayout, spacing: 10) {
+            ForEach(viewModel.cards) { card in
+                CardView(card: card)
+                    .onTapGesture {
+                        withAnimation(.easeInOut(duration: 0.5)) {
+                                                        viewModel.choose(card)
+                                                    }
+                    }
+                    .aspectRatio(2/3, contentMode: .fit)
+            }
+        }
+        .padding()
     }
 }
 
