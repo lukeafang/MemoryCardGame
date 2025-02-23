@@ -12,13 +12,8 @@ class MemoryGameViewModel: ObservableObject {
     private var indexOfOnlyFaceUpCard: Int?
     
     init() {
-        let contents = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊"]
-        // Properly create cards with pairs and assign IDs
-        cards = (contents + contents).enumerated().map { index, content in
-            Card(id: index, content: content)
-        }
-
-        cards.shuffle()
+        cards = []
+        restartGame()
     }
     
     func choose(_ card: Card) {
@@ -40,5 +35,14 @@ class MemoryGameViewModel: ObservableObject {
             cards[chosenIndex].isFaceUp = true
             indexOfOnlyFaceUpCard = chosenIndex
         }
+    }
+    
+    func restartGame() {
+        let contents = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊"]
+        cards = (contents + contents).enumerated().map { index, content in
+            Card(id: index, content: content)
+        }
+        cards.shuffle()
+        indexOfOnlyFaceUpCard = nil
     }
 }

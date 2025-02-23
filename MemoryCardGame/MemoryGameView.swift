@@ -28,6 +28,20 @@ struct MemoryGameView: View {
                 }
             }
             .padding()
+            
+            Button(action: {
+                viewModel.restartGame()
+            }) {
+                Text("Restart Game")
+                    .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+                    .padding(.horizontal)
+            }
+            .padding(.top, 20)
         }
     }
 }
